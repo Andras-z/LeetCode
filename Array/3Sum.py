@@ -13,21 +13,14 @@ A solution set is:
 '''
 nums = [-1, 0, 1, 2, -1, -4]
 nums.sort()
-n = len(nums)
-f = 0
-for i in range(n):
-	if nums[i] == 0:
-		f = i + 1
-		break
-	if nums[i] > 0:
-		f = i
-		break
 res = []
-for i in range(f):
+for i in range(len(nums) - 2):
+	if nums[i] > 0:
+		break
 	if i > 0 and nums[i] == nums[i-1]:
 		continue
 	l = i + 1
-	r = n - 1
+	r = len(nums) - 1
 	while(l < r):
 		s = nums[i] + nums[l] + nums[r]
 		if s < 0:
