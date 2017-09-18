@@ -18,43 +18,41 @@ word = "ABCB", -> returns false.
 '''
 class Solution(object):
     def exist(self, board, word):
-    	for i in range(len(board)):
-    		print (1)
-    		for j in range(len(board[0])):
-    			if board[i][j] == word[0]:
-    				print (0)
-    				if self.Search(i, j, board, word, 1):
-    					return True
-    	return False
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == word[0]:
+                    coordinate = [[0 for col in range(len(board[0]))] for row in range(len(board))]
+                    if self.Search(i, j, board, word, 1, coordinate):
+                        return True
+        return False
 
-    def Search(self, x, y, board, word, W):
-    	if W == len(word):
-    		return True
-    	board[x][y] = ''
-    	if x - 1 >= 0:
-    		if board[x - 1][y] == word[W]:
-    			if self.Search(x - 1, y, board, word, W + 1):
-    				return True
-    	if x + 1 < len(board):
-    		if board[x + 1][y] == word[W]:
-    			if self.Search(x + 1, y, board, word, W + 1):
-    				return True
-    	if y - 1 >= 0:
-    		if board[x][y - 1] == word[W]:
-    			if self.Search(x, y - 1, board, word, W + 1):
-    				return True
-    	if y + 1 < len(board[0]):
-    		if board[x][y + 1] == word[W]:
-    			if self.Search(x, y + 1, board, word, W + 1):
-    				return True
-    	return False
+    def Search(self, x, y, board, word, W, coordinate):
+        if W == len(word):
+            return True
+        coordinate[x][y] = 1
+        if x - 1 >= 0:
+            if board[x - 1][y] == word[W] and coordinate[x - 1][y] == 0:
+                if self.Search(x - 1, y, board, word, W + 1, coordinate):
+                    return True
+        if x + 1 < len(board):
+            if board[x + 1][y] == word[W] and coordinate[x + 1][y] == 0:
+                if self.Search(x + 1, y, board, word, W + 1, coordinate):
+                    return True
+        if y - 1 >= 0:
+            if board[x][y - 1] == word[W] and coordinate[x][y - 1] == 0:
+                if self.Search(x, y - 1, board, word, W + 1, coordinate):
+                    return True
+        if y + 1 < len(board[0]):
+            if board[x][y + 1] == word[W] and coordinate[x][y + 1] == 0:
+                if self.Search(x, y + 1, board, word, W + 1, coordinate):
+                    return True
+        coordinate[x][y] = 0
+        return False
 
-board = [
-		 ['C', 'A', 'A'],
-		 ['A', 'A', 'A'],
-		 ['B', 'C', 'D']		
-]
-word = "AAB"
+board = [['A', 'B', 'C', 'E'],
+         ['S', 'F', 'E', 'S'],
+         ['A', 'D', 'E', 'E']]
+word = "ABCESEEDASF"
 
 S = Solution()
 
