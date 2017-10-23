@@ -1,3 +1,4 @@
+#coding=utf-8
 '''Merge two sorted linked lists and return it as a new list. 
 The new list should be made by splicing together the nodes of the first two lists.
 '''
@@ -52,3 +53,8 @@ class Solution(object):
 		cur.next = l1 or l2
 		return dummy.next
 		
+'''
+我回来了
+Andras
+2017-10-23
+'''
