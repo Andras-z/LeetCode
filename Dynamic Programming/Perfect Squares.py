@@ -3,16 +3,12 @@
 For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.
 '''
 class Solution(object):
+	_dp = [0]
 	def numSquares(self, n):
-		d = [0] * (n + 1) 
-		Square = 2
-		for i in range(1,n + 1):
-			if i == Square ** 2:
-				d[i] = 1
-				Square += 1
-			else:
-				d[i] = d[i - (Square - 1) ** 2] + 1
-		return d[-1]
+		dp = self._dp
+		while(len(dp) <= n):
+			dp += min(dp[-i*i] for i in range(1, int(len(dp)**0.5 + 1))) + 1,
+		return dp[n]
 res = Solution()
 print (res.numSquares(12))
 '''
